@@ -3,7 +3,7 @@ require_relative 'product_catalog'
 require_relative 'transaction_processor'
 require_relative 'display_manager'
 
-class Machine
+class VendingMachine
   def insert(amount)
     @coin_manager.add_coins(amount)
     balance
