@@ -5,6 +5,9 @@ class CoinManager
   end
 
   def add_coins(amount)
+    if !amount.nil? && amount > 0
+      @balance += amount
+    end
     @balance
   end
 
