@@ -9,6 +9,9 @@ end
 class InsufficientFundsError < Error
 end
 
+class InvalidProduct < Error
+end
+
 class VendingMachine
   attr_accessor :products
   attr_reader :coin_manager
@@ -32,7 +35,7 @@ class VendingMachine
     begin
     product = @product_catalog.find_product(code)
 
-    raise 'No product' if product.nil?
+    raise InvalidProduct, 'Invalid product' if product.nil?
     raise InsufficientFundsError, "Insufficient funds" if balance < product[:price]
 
     @product_catalog.update_stock(code)
@@ -40,6 +43,8 @@ class VendingMachine
     @coin_manager.deduct_amount(product[:price])
     @display_manager.format_transaction_result(product[:name], change)
 
+    rescue InvalidProduct => e
+      e.message
     rescue InsufficientFundsError => e
       e.message
     end
