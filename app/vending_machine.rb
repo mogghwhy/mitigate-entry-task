@@ -3,6 +3,12 @@ require_relative 'product_catalog'
 require_relative 'transaction_processor'
 require_relative 'display_manager'
 
+class Error < ::StandardError
+end
+
+class InsufficientFundsError < Error
+end
+
 class VendingMachine
   attr_accessor :products
   attr_reader :coin_manager
