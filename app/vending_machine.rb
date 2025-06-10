@@ -3,6 +3,12 @@ require_relative 'product_catalog'
 require_relative 'transaction_processor'
 require_relative 'display_manager'
 
+class Error < ::StandardError
+end
+
+class InsufficientFundsError < Error
+end
+
 class VendingMachine
   attr_accessor :products
   attr_reader :coin_manager
@@ -23,15 +29,21 @@ class VendingMachine
   end
 
   def select_product(code)
+    begin
     product = @product_catalog.find_product(code)
 
     raise 'No product' if product.nil?
-    raise 'Insufficient funds' if balance < product[:price]
+    raise InsufficientFundsError, "Insufficient funds" if balance < product[:price]
 
     @product_catalog.update_stock(code)
     change = @transaction_processor.process_transaction(product, balance)
     @coin_manager.deduct_amount(product[:price])
     @display_manager.format_transaction_result(product[:name], change)
+
+    rescue InsufficientFundsError => e
+      e.message
+    end
+
   end
 
   def dispense(product)
