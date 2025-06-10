@@ -2,7 +2,7 @@ class ProductCatalog
   def initialize
     @products = {
       'A1' => { name: 'Chips crunchy', price: 1.5, stock: 3 },
-      'B2' => { name: 'Soda pop', price: 2.0, stock: 3 },
+      'B2' => { name: 'Soda Pop', price: 2.0, stock: 3 },
       'C3' => { name: 'Candy crush', price: 1.5, stock: 3 }
     }
   end
