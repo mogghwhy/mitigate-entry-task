@@ -12,7 +12,7 @@ class DisplayManager
   end
 
   def format_transaction_result(product_name, change)
-    basic_result = "Dispensed #{product_name}"
+    basic_result = "Dispensed #{product_name} with change #{change}"
     last_transaction = @transaction_processor.last_transaction_details
 
     basic_result
