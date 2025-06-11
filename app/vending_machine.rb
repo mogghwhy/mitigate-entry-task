@@ -39,6 +39,7 @@ class VendingMachine
     product = @product_catalog.find_product(code)
 
     raise InvalidProduct, 'Invalid product' if product.nil?
+    raise ProductOutOfStock, 'Product out of stock' if product[:stock] < 1
     raise InsufficientFundsError, "Insufficient funds" if balance < product[:price]
 
     @product_catalog.update_stock(code)
@@ -47,6 +48,8 @@ class VendingMachine
     @display_manager.format_transaction_result(product[:name], change)
 
     rescue InvalidProduct => e
+      e.message
+    rescue ProductOutOfStock => e
       e.message
     rescue InsufficientFundsError => e
       e.message
