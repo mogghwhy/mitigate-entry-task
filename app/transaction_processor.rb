@@ -31,7 +31,7 @@ class TransactionProcessor
   end
 
   def transaction_history
-    []
+     @history
   end
 
   def last_transaction_details
