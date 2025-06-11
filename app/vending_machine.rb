@@ -12,6 +12,9 @@ end
 class InvalidProduct < Error
 end
 
+class ProductOutOfStock < Error
+end
+
 class VendingMachine
   attr_accessor :products
   attr_reader :coin_manager
