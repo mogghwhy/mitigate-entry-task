@@ -20,6 +20,6 @@ class DisplayManager
     basic_result = "Dispensed #{product_name} with change #{change}"
     last_transaction = @transaction_processor.last_transaction_details
 
-    basic_result
+    [basic_result, last_transaction].join("\n")
   end
 end
