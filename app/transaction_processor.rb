@@ -1,6 +1,6 @@
 module TransactionFormattable
   def format_transaction_details(transaction)
-    "#{transaction[:product]} - Paid: #{transaction[:paid]} - Change: #{transaction[:change]}"
+    "Transaction details: #{transaction[:product]} - Paid: #{transaction[:paid]} - Change: #{transaction[:change]}"
   end
 end
 
@@ -31,7 +31,7 @@ class TransactionProcessor
   end
 
   def transaction_history
-    []
+     @history
   end
 
   def last_transaction_details

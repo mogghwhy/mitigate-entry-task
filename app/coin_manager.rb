@@ -1,9 +1,13 @@
 class CoinManager
+  attr_reader :balance
   def initialize
-    @balance = nil
+    @balance = 0.0
   end
 
   def add_coins(amount)
+    if !amount.nil? && amount > 0
+      @balance += amount
+    end
     @balance
   end
 
@@ -19,6 +23,8 @@ class CoinManager
   end
 
   def reset_balance
-    20
+    returned_amount = @balance
+    @balance = 0.0
+    returned_amount 
   end
 end
